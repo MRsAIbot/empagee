@@ -14,9 +14,13 @@
             
             <canvas id="canvas" width="320" height="240"></canvas>
             <div id="photo">
+                <img src="{{ photo }}">
             </div>
             <script src="static/js/photo.js"></script> 
-            <h3 id="analysis-heading3" style="color:#000000;font-weight:400;text-align:center;">Sentiment</h3>
+            <h3 id="analysis-heading3" style="color:#000000;font-weight:400;text-align:center;">Joy: {{ emotion1 }}</h3>
+            <h3 id="analysis-heading3" style="color:#000000;font-weight:400;text-align:center;">Anger: {{ emotion2 }}</h3>
+            <h3 id="analysis-heading3" style="color:#000000;font-weight:400;text-align:center;">Surprise: {{ emotion3 }}</h3>
+            <h3 id="analysis-heading3" style="color:#000000;font-weight:400;text-align:center;">Sorrow: {{ emotion4 }}</h3>
             <button id="analysis-button14" class="button button-positive  button-block">Save analysis</button>
         </div>
     </ion-content>
