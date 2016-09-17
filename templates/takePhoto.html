@@ -2,22 +2,28 @@
 
 {% block content %}
 <link href="static/lib/ionic/css/ionic.css" rel="stylesheet">
+<script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js"></script>
 
 
 <ion-view title="Take photo" id="page1">
     <ion-content padding="true" class="has-header">
         <form id="takePhoto-form1" class="list">
             <label class="item item-input" id="takePhoto-input1" name="Patient name">
-                <input type="text" placeholder="Enter patient name">
+                <input id="name" type="text" placeholder="Enter patient name">
             </label>
         </form>
-         
+
 		<video id="video" width="320" height="240" autoplay></video>
 		<button id="snap">Take photo</button>
 		<canvas id="canvas" width="320" height="240"></canvas>
 
-		<script src="static/js/photo.js"></script> 
-        <a href="/analyseExpression" id="takePhoto-button5" class="button button-positive button-block">
+		<div id="photo">
+        </div>
+
+  		<script src="static/js/photo.js"></script> 
+		
+	
+        <a href="/analysis" id="analyse" class="button button-positive button-block">
         	Analyse photo
         </a>
     </ion-content>

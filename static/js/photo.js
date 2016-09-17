@@ -4,10 +4,11 @@ var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 
 var video = document.getElementById('video');
-
+var image = new Image();
 
 // Get access to the camera!
-if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+
+if(window.location.pathname == '/takePhoto' && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     // Not adding `{ audio: true }` since we only want video now
     navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
         video.src = window.URL.createObjectURL(stream);
@@ -16,10 +17,30 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 }
 
 // Trigger photo take
-document.getElementById("snap").addEventListener("click", function() {
-	context.drawImage(video, 0, 0, 320, 240);
-	convertCanvasToImage(canvas);
-});
+if(window.location.pathname == '/takePhoto') { 
+	document.getElementById("snap").addEventListener("click", function() {
+		context.drawImage(video, 0, 0, 320, 240);
+		image = convertCanvasToImage(canvas);
+		// var photo = document.getElementById('photo');
+		// photo.appendChild(image);
+
+		var imageData = canvas.toDataURL("img/png");
+		imageData = imageData.replace('data:image/png;base64,', '');
+		var postData = JSON.stringify({imageData: imageData});
+
+		$.ajax({
+			url: '/upload',
+			type: "POST",
+			data: imageData,
+			contentType: "text/html"
+		});
+	});	
+}
+
+if(window.location.pathname == '/analysis') {
+	var photo = document.getElementById('photo');
+	photo.appendChild(image);
+}
 
 // Converts canvas to an image
 function convertCanvasToImage(canvas) {
@@ -27,11 +48,4 @@ function convertCanvasToImage(canvas) {
 	image.src = canvas.toDataURL("image/png");
 	console.log(image);
 	return image;
-}
-
-function saveImage(canvas) {
-	var image = canvas.toDataURL("img/png");
-	var postData = JSON.stringify({imageData: image});
-
-	console.log(postData);
 }
