@@ -87,3 +87,5 @@ empageevenv/
 
 # Rope project settings
 .ropeproject
+
+.idea/
