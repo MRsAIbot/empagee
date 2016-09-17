@@ -74,6 +74,11 @@ def upload():
         # Move the file form the temporal folder to
         # the upload folder we setup
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        # Call Google Vision API
+        with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb') as face_file:
+            annotation = detect_face(face_file, 1)
+            print annotation
+            # return annotation
         # Redirect the user to the uploaded_file route, which
         # will basically show on the browser the uploaded file
         return redirect(url_for('uploaded_file',
