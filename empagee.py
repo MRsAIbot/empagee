@@ -53,6 +53,10 @@ def detect_face(face_file, max_results):
     return response['responses'][0]['faceAnnotations']
 
 
+def beautify(ugly_string):
+    return ' '.join(ugly_string.split('_')).lower()
+
+
 @app.route("/")
 def hello():
     return render_template('login.html')
@@ -85,7 +89,18 @@ def takePhoto():
 
 @app.route("/analysis")
 def analysis():
-    return render_template('analysis.html')
+    filename = 'patient1.png'
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    with open(filepath, 'rb') as f:
+        data = f.read()
+        annotation = detect_face(data, 1)
+        print annotation
+        print filepath
+        filepath = os.path.join('uploads', filename)
+    return render_template('analysis.html', photo=filepath, emotion1=beautify(annotation[0]['joyLikelihood']),
+                           emotion2=beautify(annotation[0]['angerLikelihood']),
+                           emotion3=beautify(annotation[0]['surpriseLikelihood']),
+                           emotion4=beautify(annotation[0]['sorrowLikelihood']))
 
 
 @app.route("/analyseExpression")
@@ -126,16 +141,29 @@ def upload():
     #     # Move the file form the temporal folder to
     #     # the upload folder we setup
     #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    filename = 'patient1.png'
+    with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'wb') as f:
+        f.write(decodedImg)
     # Call Google Vision API
     # with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb') as face_file:
-    annotation = detect_face(decodedImg, 1)
-    print annotation
+    # annotation = detect_face(decodedImg, 1)
+    # print "Joy: %s" % annotation[0]['joyLikelihood']
+    # print "Anger: %s" % annotation[0]['angerLikelihood']
     # return annotation
     # Redirect the user to the uploaded_file route, which
     # will basically show on the browser the uploaded file
     return "Aap"
     # return redirect(url_for('uploaded_file',
     #                         filename=filename))
+
+
+# @app.route('/emotions', methods=['GET'])
+# def get_emotions():
+#     filename = 'patient1.png'
+#     with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb') as f:
+#         data = f.read()
+#         annotation = detect_face(data, 1)
+#         return analysis(data, annotation[0]['joyLikelihood'])
 
 
 # This route is expecting a parameter containing the name
