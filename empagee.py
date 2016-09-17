@@ -86,6 +86,11 @@ def analyseExpression():
 	return render_template('analyseExpression.html')
 
 
+
+@app.route("/affect/<filname>")
+def get_affect(filename):
+    return 0
+
 # Route that will process the file upload
 @app.route('/upload', methods = ['POST'])
 def upload():
@@ -98,66 +103,31 @@ def upload():
 
 		output.close()
 		return "JSON Message: " + request.data
-	    # # Get the name of the uploaded file
-	    # file = request.files['file']
-	    # # Check if the file is one of the allowed types/extensions
-	    # if file and allowed_file(file.filename):
-	    #     # Make the filename safe, remove unsupported chars
-	    #     filename = secure_filename(file.filename)
-	    #     # Move the file form the temporal folder to
-	    #     # the upload folder we setup
-	    #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-	    #     # Redirect the user to the uploaded_file route, which
-	    #     # will basically show on the browser the uploaded file
-	    #     return redirect(url_for('uploaded_file',
-	    #                             filename=filename))
-
-
-@app.route('/messages', methods = ['POST'])
-def api_message():
-	if request.headers['Content-Type'] == 'text/plain':
-		return "Text Message: " + request.data
-
-	elif request.headers['Content-Type'] == 'application/json':
-		return "JSON Message: " + json.dumps(request.json)
-
-	elif request.headers['Content-Type'] == 'application/octet-stream':
-		f = open('./binary', 'wb')
-		f.write(request.data)
-		f.close()
-		return "Binary message written!"
-
-	else:
-		return "415 Unsupported Media Type ;)"
-
-
-
-@app.route("/affect/<filname>")
-def get_affect(filename):
-    return 0
-
 
 # Route that will process the file upload
 @app.route('/upload', methods=['POST'])
 def upload():
-    # Get the name of the uploaded file
-    file = request.files['file']
-    # Check if the file is one of the allowed types/extensions
-    if file and allowed_file(file.filename):
-        # Make the filename safe, remove unsupported chars
-        filename = secure_filename(file.filename)
-        # Move the file form the temporal folder to
-        # the upload folder we setup
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        # Call Google Vision API
-        with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb') as face_file:
-            annotation = detect_face(face_file, 1)
-            print annotation
-            # return annotation
-        # Redirect the user to the uploaded_file route, which
-        # will basically show on the browser the uploaded file
-        return redirect(url_for('uploaded_file',
-                                filename=filename))
+	imgstr = request.data
+	decodedImg = imgstr.decode('base64')
+
+	# Get the name of the uploaded file
+	file = request.files['file']
+	# Check if the file is one of the allowed types/extensions
+	if file and allowed_file(file.filename):
+		# Make the filename safe, remove unsupported chars
+		filename = secure_filename(file.filename)
+		# Move the file form the temporal folder to
+		# the upload folder we setup
+		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+	# Call Google Vision API
+	# with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb') as face_file:
+	annotation = detect_face(decodedImg, 1)
+	print annotation
+	# return annotation
+	# Redirect the user to the uploaded_file route, which
+	# will basically show on the browser the uploaded file
+	return redirect(url_for('uploaded_file',
+	filename=filename))
 
 
 # This route is expecting a parameter containing the name
