@@ -17,44 +17,44 @@ angular.module('app.routes', [])
   })
 
   .state('login', {
-    url: '/page3',
+    url: '/',
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
   })
 
   .state('home', {
     url: '/page4',
-    templateUrl: 'templates/home.html',
+    templateUrl: 'templates/pages/home.html',
     controller: 'homeCtrl'
   })
 
   .state('patients', {
     url: '/page5',
-    templateUrl: 'templates/patients.html',
+    templateUrl: 'patients.html',
     controller: 'patientsCtrl'
   })
 
   .state('signup', {
     url: '/page6',
-    templateUrl: 'templates/signup.html',
+    templateUrl: 'signup.html',
     controller: 'signupCtrl'
   })
 
   .state('analyseExpression', {
     url: '/page7',
-    templateUrl: 'templates/analyseExpression.html',
+    templateUrl: 'analyseExpression.html',
     controller: 'analyseExpressionCtrl'
   })
 
   .state('analysis', {
     url: '/page8',
-    templateUrl: 'templates/analysis.html',
+    templateUrl: 'analysis.html',
     controller: 'analysisCtrl'
   })
 
   .state('patient1', {
     url: '/page9',
-    templateUrl: 'templates/patient1.html',
+    templateUrl: 'patient1.html',
     controller: 'patient1Ctrl'
   })
 

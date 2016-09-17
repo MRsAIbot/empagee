@@ -1,12 +1,13 @@
+{% extends "index.html" %}
+
+{% block content %}
+<link href="static/lib/ionic/css/ionic.css" rel="stylesheet">
 <ion-view title="Home" id="page4">
     <ion-content padding="true" class="has-header">
-        <div class="list card" id="home-card23">
-            <ion-item class="item-icon-left" id="home-list-item8" ui-sref="patients">
-                <i class="icon ion-android-person"></i>Patient records</ion-item>
-            <ion-item class="item-icon-left" id="home-list-item9" ui-sref="takePhoto">
-                <i class="icon ion-image"></i>Take photo</ion-item>
-            <ion-item class="item-icon-left" id="home-list-item13">
-                <i class="icon ion-android-settings"></i>Settings</ion-item>
-        </div>
+        <a href="/patients" id="login-button6" class="button button-positive button-block">Patient records</a>
+        <a href="/takePhoto" id="login-button6" class="button button-positive button-block">Take photo</a>
+        <a href="/home" id="login-button6" class="button button-positive button-block">Settings</a>
     </ion-content>
 </ion-view>
+
+{% endblock %}
