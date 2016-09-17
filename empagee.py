@@ -33,7 +33,7 @@ def get_vision_service():
 
 
 def detect_face(face_file, max_results):
-    image_content = face_file.read()
+    image_content = face_file
     batch_request = [{
         'image': {
             'content': base64.b64encode(image_content).decode('UTF-8')
@@ -118,7 +118,7 @@ def upload():
     decodedImg = imgstr.decode('base64')
 
     # Get the name of the uploaded file
-    file = request.files['file']
+    # file = request.files['file']
     # Check if the file is one of the allowed types/extensions
     # if file and allowed_file(file.filename):
     #     # Make the filename safe, remove unsupported chars
@@ -133,8 +133,9 @@ def upload():
     # return annotation
     # Redirect the user to the uploaded_file route, which
     # will basically show on the browser the uploaded file
-    return redirect(url_for('uploaded_file',
-                            filename=filename))
+    return "Aap"
+    # return redirect(url_for('uploaded_file',
+    #                         filename=filename))
 
 
 # This route is expecting a parameter containing the name
