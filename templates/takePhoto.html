@@ -7,25 +7,27 @@
 
 <ion-view title="Take photo" id="page1">
     <ion-content padding="true" class="has-header">
-        <form id="takePhoto-form1" class="list">
-            <label class="item item-input" id="takePhoto-input1" name="Patient name">
-                <input id="name" type="text" placeholder="Enter patient name">
-            </label>
-        </form>
+    	<div id="takephoto">
+	        <form id="takePhoto-form1" class="list">
+	            <label class="item item-input" id="takePhoto-input1" name="Patient name">
+	                <input id="name" type="text" placeholder="Enter patient name">
+	            </label>
+	        </form>
 
-		<video id="video" width="320" height="240" autoplay></video>
-		<button id="snap">Take photo</button>
-		<canvas id="canvas" width="320" height="240"></canvas>
+			<video id="video" width="320" height="240" autoplay></video>
+			<button id="snap" class="button button-positive">Take photo</button>
+			<canvas id="canvas" width="320" height="240"></canvas>
 
-		<div id="photo">
-        </div>
+			<div id="photo">
+	        </div>
 
-  		<script src="static/js/photo.js"></script> 
+	  		<script src="static/js/photo.js"></script> 
+			
 		
-	
-        <a href="/analysis" id="analyse" class="button button-positive button-block">
-        	Analyse photo
-        </a>
+	        <a href="/analysis" id="analyse" class="button button-positive button-block">
+	        	Analyse photo
+	        </a>
+    	</div>
     </ion-content>
 </ion-view>
 

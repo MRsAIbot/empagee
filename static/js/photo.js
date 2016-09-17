@@ -16,9 +16,14 @@ if(window.location.pathname == '/takePhoto' && navigator.mediaDevices && navigat
     });
 }
 
+var name;
+
 // Trigger photo take
 if(window.location.pathname == '/takePhoto') { 
 	document.getElementById("snap").addEventListener("click", function() {
+		name = document.getElementById("name").value;
+		console.log(name);
+
 		context.drawImage(video, 0, 0, 320, 240);
 		image = convertCanvasToImage(canvas);
 		// var photo = document.getElementById('photo');
@@ -38,8 +43,8 @@ if(window.location.pathname == '/takePhoto') {
 }
 
 if(window.location.pathname == '/analysis') {
-	var photo = document.getElementById('photo');
-	photo.appendChild(image);
+	console.log(name);
+	document.getElementById("name").innerHTML = name;
 }
 
 // Converts canvas to an image

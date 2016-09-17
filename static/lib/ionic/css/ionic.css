@@ -3330,7 +3330,9 @@ body,
   bottom: 0;
   left: 0;
   overflow: hidden;
-  margin: 0;
+  margin: 2%;
+  margin-right: 15%;
+  margin-left: 15%;
   padding: 0;
   color: #000;
   word-wrap: break-word;
@@ -9727,3 +9729,40 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+
+form#login-form2 {
+    align-self: center;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+a#login-button6 {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+div#takephoto {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+button#snap {
+    width: 19%;
+}
+
+div#name {
+    font-size: large;
+    margin-left: 2%;
+}
+
+div#analysis {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+img#logo {
+  margin-left: 20%;
+  margin-bottom: 5%;
+}

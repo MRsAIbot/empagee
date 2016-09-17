@@ -5,18 +5,20 @@
 
 <ion-view title="Analysis" id="page8">
     <ion-content padding="true" class="has-header">
-        <div class="list card" id="analysis-card24">
-            <ion-item class="item-avatar" id="analysis-list-item22">
-                <h2>Patient name</h2>
-            </ion-item>
+        <div id="analysis">
+            <div class="list card" id="analysis-card24">
+                <ion-item class="item-avatar" id="analysis-list-item22">
+                    <div id="name"></div>
+                </ion-item>
+            </div>
+            
+            <canvas id="canvas" width="320" height="240"></canvas>
+            <div id="photo">
+            </div>
+            <script src="static/js/photo.js"></script> 
+            <h3 id="analysis-heading3" style="color:#000000;font-weight:400;text-align:center;">Sentiment</h3>
+            <button id="analysis-button14" class="button button-positive  button-block">Save analysis</button>
         </div>
-        
-        <canvas id="canvas" width="320" height="240"></canvas>
-        <div id="photo">
-        </div>
-        <script src="static/js/photo.js"></script> 
-        <h3 id="analysis-heading3" style="color:#000000;font-weight:400;text-align:center;">Sentiment</h3>
-        <button id="analysis-button14" class="button button-positive  button-block">Save analysis</button>
     </ion-content>
 </ion-view>
 
