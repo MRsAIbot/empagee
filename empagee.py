@@ -17,7 +17,7 @@ app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.realpath(__fi
 # These are the extension that we are accepting to be uploaded
 app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-DISCOVERY_URL='https://{api}.googleapis.com/$discovery/rest?version={apiVersion}'
+DISCOVERY_URL = 'https://{api}.googleapis.com/$discovery/rest?version={apiVersion}'
 
 
 # For a given file, return whether it's an allowed type or not
@@ -57,77 +57,84 @@ def detect_face(face_file, max_results):
 def hello():
     return render_template('login.html')
 
+
 @app.route("/home")
 def home():
-	return render_template('home.html')
+    return render_template('home.html')
+
 
 @app.route("/patients")
 def patients():
-	return render_template('patients.html')
+    return render_template('patients.html')
+
 
 @app.route("/patient1")
 def patient1():
-	return render_template('patient1.html')
+    return render_template('patient1.html')
+
 
 @app.route("/signup")
 def signup():
-	return render_template('signup.html')
+    return render_template('signup.html')
+
 
 @app.route("/takePhoto")
 def takePhoto():
-	return render_template('takePhoto.html')
+    return render_template('takePhoto.html')
+
 
 @app.route("/analysis")
 def analysis():
-	return render_template('analysis.html')
+    return render_template('analysis.html')
+
 
 @app.route("/analyseExpression")
 def analyseExpression():
-	return render_template('analyseExpression.html')
-
+    return render_template('analyseExpression.html')
 
 
 @app.route("/affect/<filname>")
 def get_affect(filename):
     return 0
 
-# Route that will process the file upload
-@app.route('/upload', methods = ['POST'])
-def upload():
-	if request.headers['Content-Type'] == 'text/html':
 
-		imgstr = request.data
-		output = open('uploads/output.png', 'wb')
+# # Route that will process the file upload
+# @app.route('/upload', methods=['POST'])
+# def upload():
+#     if request.headers['Content-Type'] == 'text/html':
+#         imgstr = request.data
+#         output = open('uploads/output.png', 'wb')
+#
+#         output.write(imgstr.decode('base64'))
+#
+#         output.close()
+#         return "JSON Message: " + request.data
 
-		output.write(imgstr.decode('base64'))
-
-		output.close()
-		return "JSON Message: " + request.data
 
 # Route that will process the file upload
 @app.route('/upload', methods=['POST'])
 def upload():
-	imgstr = request.data
-	decodedImg = imgstr.decode('base64')
+    imgstr = request.data
+    decodedImg = imgstr.decode('base64')
 
-	# Get the name of the uploaded file
-	file = request.files['file']
-	# Check if the file is one of the allowed types/extensions
-	if file and allowed_file(file.filename):
-		# Make the filename safe, remove unsupported chars
-		filename = secure_filename(file.filename)
-		# Move the file form the temporal folder to
-		# the upload folder we setup
-		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-	# Call Google Vision API
-	# with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb') as face_file:
-	annotation = detect_face(decodedImg, 1)
-	print annotation
-	# return annotation
-	# Redirect the user to the uploaded_file route, which
-	# will basically show on the browser the uploaded file
-	return redirect(url_for('uploaded_file',
-	filename=filename))
+    # Get the name of the uploaded file
+    file = request.files['file']
+    # Check if the file is one of the allowed types/extensions
+    # if file and allowed_file(file.filename):
+    #     # Make the filename safe, remove unsupported chars
+    #     filename = secure_filename(file.filename)
+    #     # Move the file form the temporal folder to
+    #     # the upload folder we setup
+    #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    # Call Google Vision API
+    # with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'rb') as face_file:
+    annotation = detect_face(decodedImg, 1)
+    print annotation
+    # return annotation
+    # Redirect the user to the uploaded_file route, which
+    # will basically show on the browser the uploaded file
+    return redirect(url_for('uploaded_file',
+                            filename=filename))
 
 
 # This route is expecting a parameter containing the name
